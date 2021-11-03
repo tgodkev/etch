@@ -1,4 +1,27 @@
 const container = document.getElementById('container');
+const ten = document.getElementById('ten');
+const twenty = document.getElementById('twenty');
+const thirty = document.getElementById('thirty');
+const resetBtn = document.getElementById('reset');
+
+ten.addEventListener('click', function() {
+    resetGrid();
+    makeGrid(10, 10);
+}); 
+
+twenty.addEventListener('click', function() {
+    resetGrid();
+    makeGrid(20, 20);
+});
+
+thirty.addEventListener('click', function() {
+    resetGrid();
+    makeGrid(30, 30);
+});
+
+
+
+
 
 function makeGrid(col, row) {
     container.style.setProperty('--grid-rows', row);
@@ -9,21 +32,23 @@ function makeGrid(col, row) {
     }
 }
 
-  makeGrid(20, 20);
+container.addEventListener('mouseover', function(e) {
+  if (e.target.className === 'grid-item') {
+    e.target.style.backgroundColor = "black";
+  }});
 
-  container.addEventListener('mouseover', function(e) {
-    if (e.target.className === 'grid-item') {
-      e.target.style.backgroundColor = 'black';
-    }});
 
-    function resetGrid() {
-      let gridItems = document.querySelectorAll('.grid-item');
-      for (let i = 0; i < gridItems.length; i++) {
-        gridItems[i].style.backgroundColor = 'white';
-      }
-    }
+function resetGrid(){
+    let cells = document.querySelectorAll('.grid-item');
+    cells.forEach(function(cell){
+        cell.style.backgroundColor = "white";
+        cell.remove(cell);
+    });
+}
+    
 
-    const resetBtn = document.getElementById('reset');
+
+   
 
     resetBtn.addEventListener('click', function() {
       resetGrid();
